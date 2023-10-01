@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, url_for, session, flash, send_from_directory
 from midigen import create_midi_song
 from quantum import create_song
+import os
 import uuid
 import matplotlib
 
@@ -35,4 +36,5 @@ def send_report(path):
 
 
 if __name__ == '__main__':
+    os.makedirs("/tmp/quantum-music/", exist_ok=True)
     app.run(debug=True)
