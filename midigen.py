@@ -28,7 +28,7 @@ def create_midi_song(song: list[list[str]]):
     channel = 0
     volume = 100
 
-    for bar in example:
+    for bar in song:
         for note in bar:
             duration = 1
             if note[-1] == '*':
