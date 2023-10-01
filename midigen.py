@@ -17,10 +17,10 @@ note_to_pitch = {
 
 
 def create_midi_song(song: list[list[str]]):
-    mf = MIDIFile(1)     # only 1 track
-    track = 0   # the only track
+    mf = MIDIFile(1)  # only 1 track
+    track = 0         # the only track
 
-    time = 0    # start at the beginning
+    time = 0          # start at the beginning
     mf.addTrackName(track, time, "Sample Track")
     mf.addTempo(track, time, 180)
 
@@ -45,9 +45,3 @@ def create_midi_song(song: list[list[str]]):
             time += duration
 
     return mf
-
-
-
-# # write it to disk
-# with open("output.mid", 'wb') as outf:
-#     create_midi_song(example).writeFile(outf)
