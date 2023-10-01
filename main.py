@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, url_for, session, f
 from midigen import create_midi_song
 from quantum import create_song
 import uuid
+import matplotlib
 
 app = Flask(__name__)
 app.secret_key = "squishystick"
@@ -17,7 +18,7 @@ def main():
 
 @app.route('/generate')
 def generate():
-    notes = create_song(30)
+    notes, qc = create_song(30)
     midi = create_midi_song(notes)
     filename = str(uuid.uuid4())
     filepath = "/tmp/quantum-music/" + filename + ".mid"

@@ -91,11 +91,14 @@ def run_tact():
         sounds.append(sound_2)
         position += 4
 
-    return sounds
+    return sounds, qc
 
 
 def create_song(length):
     tacts = []
+    circuits = []
     for i in range(length):
-        tacts.append(run_tact())
-    return tacts
+        tact, qc = run_tact()
+        tacts.append(tact)
+        circuits.append(qc)
+    return tacts, circuits
