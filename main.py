@@ -30,7 +30,7 @@ def generate():
 
 @app.route('/songs/<path:path>')
 def send_report(path):
-    return send_from_directory('/tmp/', path)
+    return send_from_directory('/tmp/quantum-music/', path)
 
 
 if __name__ == '__main__':
