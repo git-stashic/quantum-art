@@ -7,22 +7,26 @@
     transition: all 0.35s linear;
 }
 body {
-    color: white;
-    display: flex;
-    --bg: #358194;
-    min-height: 100vh;
+    font-family: 'Gabarito', cursive;
+    background-color: #f0f0f0;
+    text-align: center;
     align-items: center;
     justify-content: center;
-    background-color: var(--bg);
+}
+
+.container {
+    text-align: center;
+    margin-top: 20vh;
 }
 midi-player {
     display: block;
     width: inherit;
     margin: 4px;
     margin-bottom: 0;
+    max-width: 300px;
   }
 midi-player::part(control-panel) {
-    background: #150f70;
+    background: #0050a0;
     border: 2px solid #fff;
     border-radius: 10px 10px 0 0;
   }
