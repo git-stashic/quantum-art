@@ -1,6 +1,9 @@
 from qiskit import transpile, QuantumCircuit
 from qiskit_aer import AerSimulator
+from qiskit.visualization import circuit_drawer
 import random
+import os
+import matplotlib
 
 
 backend = AerSimulator()
@@ -97,11 +100,19 @@ def run_tact():
     return sounds, qc
 
 
-def create_song(length):
+def create_song(length, song_id):
     tacts = []
     circuits = []
+    os.mkdir('/tmp/quantum-music/' + str(song_id))
     for i in range(length):
         tact, qc = run_tact()
         tacts.append(tact)
         circuits.append(qc)
+        save_circuit(qc, '/tmp/quantum-music/' +
+                     str(song_id) + '/c' + str(i) + '.png')
     return tacts, circuits
+
+
+def save_circuit(circuit, filename):
+    circuit_drawer(circuit, output='mpl').savefig(filename)
+    # matplotlib.pyplot.close()

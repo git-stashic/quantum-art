@@ -18,3 +18,4 @@ midiutil==1.2.1
 uuid==1.30
 flask==3.0.0
 matplotlib==3.8.0
+pylatexenc==2.10

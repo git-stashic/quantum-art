@@ -17,13 +17,22 @@
 <body id="main">
     <div class="container">
         <center>
-            <h1>(Quantum) Generated for you!<br/><br/></h1>
-            <midi-player src="/songs/{{ midi }}" sound-font visualizer="#myVisualizer"></midi-player>
-            <br/><br/><br/>
-            <midi-visualizer style="width: 90%;" type="staff" id="myVisualizer"></midi-visualizer>
-            
+            <br />
+            <h1>(Quantum) Generated for you!<br /><br /></h1>
+            <midi-player src="/songs/{{ song_id }}" sound-font visualizer="#myVisualizer"></midi-player>
+            <br /><br /><br />
+            <div style="min-height: 150px;">
+                <midi-visualizer style="width: 90%;" type="staff" id="myVisualizer"></midi-visualizer>
+            </div>
+            <br />
+            <div style="width: 90%; overflow-x: scroll; overflow-y: hidden; display: flex;">
+                {% for i in range(length) %}
+                <img src="/circuits/{{ song_id }}/c{{ i }}" alt="Generated Music" style="width: 350px;">
+                {% endfor %}
+            </div>
+
         </center>
-        
+
 
 
     </div>

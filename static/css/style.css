@@ -5,7 +5,8 @@ body {
 }
 
 .container {
-    margin-top: 20vh;
+    width: 80%;
+    margin: 5vh auto;
 }
 
 #main h1 {
@@ -15,9 +16,8 @@ body {
 #main p {
     font-size: 16px;
     padding: 10px;
-}
 
-.button {
+.button, input[type="submit"] {
     padding: 15px 30px;
     background-color: #0050a0;
     color: #fff;
