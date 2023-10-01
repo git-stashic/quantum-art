@@ -1,3 +1,4 @@
+import subprocess
 from midiutil.MidiFile import MIDIFile
 
 note_to_pitch = {
@@ -31,8 +32,12 @@ note_to_pitch_bass = {
     'B': 71-n,
 }
 
+INSTRUMENTS = {
+    'piano': ('soundfonts/TimGM6mb.sf2', 0),
+    'kalimba': ('soundfonts/MultiKalimba.sf2', 9)
+}
 
-def create_midi_song(song: list[list[str]]):
+def create_midi_song(song: list[list[str]], channel = 0):
     mf = MIDIFile(2)  # only 1 track
     track = 0         # the only track
 
@@ -41,7 +46,6 @@ def create_midi_song(song: list[list[str]]):
     mf.addTempo(track, time, 240)
 
     # add some notes
-    channel = 0
     volume = 100
 
     bass = False
@@ -90,3 +94,24 @@ def create_midi_song(song: list[list[str]]):
             time += duration
 
     return mf
+
+
+def convert_midi_to_mp3(id, soundfont):
+    input_midi = f'/tmp/quantum-music/{id}.mid'
+    raw_file = f'/tmp/quantum-music/{id}.raw'
+    wav_file = f'/tmp/quantum-music/{id}.wav'
+    mp3_file = f'/tmp/quantum-music/{id}.mp3'
+    # Convert MIDI to raw audio using FluidSynth
+    fluidsynth_cmd = f'fluidsynth -a alsa -g 1.0 -l -i -T raw -F {raw_file} {soundfont} {input_midi}'
+    subprocess.run(fluidsynth_cmd, shell=True)
+
+    # Convert raw audio to WAV using SoX
+    sox_cmd = f'sox -r 44100 -e signed -b 16 -c 2 {raw_file} {wav_file}'
+    subprocess.run(sox_cmd, shell=True)
+
+    # Convert WAV to MP3 using LAME
+    lame_cmd = f'lame -b 320 {wav_file} {mp3_file}'
+    subprocess.run(lame_cmd, shell=True)
+
+    # Clean up intermediate files (optional)
+    subprocess.run(f'rm {raw_file} {wav_file}', shell=True)

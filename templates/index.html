@@ -15,7 +15,18 @@
     <div class="container">
         <h1>Quantum Music</h1>
         <p>Click the button below to generate quantum music!</p>
-        <a class="button" href="generate">Generate</a>
+        <form action="generate" method="get">
+            <div class="whatever">
+                {% for key in INSTRUMENTS.keys() %}
+                <label>
+                    <input type="radio" name="instrument" value="{{ key }}"> {{ key }}
+                </label>
+                <br>
+                {% endfor %}
+            </div>
+            <br>
+            <input class="button" type="submit" value="Submit">
+        </form>
     </div>
 </body>
 

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, url_for, session, flash, send_from_directory
-from midigen import create_midi_song
+from midigen import *
 from quantum import create_song
 import os
 import uuid
@@ -14,17 +14,19 @@ def main():
     if request.method == "POST":
         if 'generate' in request.form:
             return redirect(url_for("generate"))
-    return render_template('index.html')
+    return render_template('index.html', INSTRUMENTS=INSTRUMENTS)
 
 
 @app.route('/generate')
 def generate():
+    sf, channel = INSTRUMENTS[request.args.get('instrument', 'piano')]
     notes, qc = create_song(30)
-    midi = create_midi_song(notes)
+    midi = create_midi_song(notes, channel)
     filename = str(uuid.uuid4())
     filepath = "/tmp/quantum-music/" + filename + ".mid"
     with open(filepath, 'wb') as outf:
         midi.writeFile(outf)
+    convert_midi_to_mp3(filename, sf)
     return render_template('generate.html', midi=filename + ".mid")
 
     app.run(debug=True)
