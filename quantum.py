@@ -4,6 +4,10 @@ from qiskit_aer import AerSimulator
 
 backend = AerSimulator()
 
+sounds = {'0000': 'C', '0001': 'Cis', '0010': 'D',  '0011': 'Dis', '0100': 'E',
+          '0101': 'F', '0110': 'Fis', '0111': 'G',  '1000': 'Gis', '1001': 'A',
+          '1010': 'Ais', '1011': 'B',  '1100': '', '1101': '', '1110': '', '1111':  ''}
+
 
 def get_value(gates_list=[]):
     circ = QuantumCircuit(4,4)
