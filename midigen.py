@@ -22,7 +22,7 @@ def create_midi_song(song: list[list[str]]):
 
     time = 0          # start at the beginning
     mf.addTrackName(track, time, "Sample Track")
-    mf.addTempo(track, time, 180)
+    mf.addTempo(track, time, 240)
 
     # add some notes
     channel = 0
