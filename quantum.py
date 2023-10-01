@@ -7,9 +7,11 @@ backend = AerSimulator()
 
 sounds = {'0000': 'C', '0001': 'Cis', '0010': 'D',  '0011': 'Dis', '0100': 'E',
           '0101': 'F', '0110': 'Fis', '0111': 'G',  '1000': 'Gis', '1001': 'A',
-          '1010': 'Ais', '1011': 'B',  '1100': '*', '1101': '/', '1110': '_', '1111':  '/'}
+          '1010': 'Ais', '1011': 'B',  '1100': '*', '1101': '/', '1110': '_',
+          '1111':  '/'}
 
 special = ['/', '*']
+
 
 def apply_random_gate(qc, qubit, other_qubits):
     gate_choice = random.choice(['H', 'X', 'Y', 'Z', 'CX', 'RY', 'RZ'])
@@ -31,6 +33,7 @@ def apply_random_gate(qc, qubit, other_qubits):
     elif gate_choice == 'RZ':
         angle = random.uniform(0, 2 * 3.14159)
         qc.rz(angle, qubit)
+
 
 def generate_circuit(qc):
     for _ in range(5):
@@ -56,7 +59,7 @@ def run_tact():
     position = 0
     sounds = []
 
-    qc = QuantumCircuit(4,4)
+    qc = QuantumCircuit(4, 4)
 
     while (position <= 7):
         sound_1 = get_value(generate_circuit(qc))

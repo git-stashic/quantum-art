@@ -58,7 +58,7 @@ def create_midi_song(song: list[list[str]]):
             if note == '_':
                 time += duration
                 continue
-            if(bass):
+            if bass:
                 pitch = note_to_pitch_bass[note]
             else:
                 pitch = note_to_pitch[note]
@@ -82,12 +82,11 @@ def create_midi_song(song: list[list[str]]):
             if note == '_':
                 time += duration
                 continue
-            if(bass):
+            if bass:
                 pitch = note_to_pitch_bass[note]
             else:
                 pitch = note_to_pitch[note]
             mf.addNote(track, channel, pitch, time, duration, volume)
             time += duration
-
 
     return mf
