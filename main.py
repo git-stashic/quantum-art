@@ -5,6 +5,11 @@ import os
 import uuid
 import matplotlib
 
+
+def get_save_dir():
+    return os.environ.get('SAVE_DIR', '/tmp/quantum-music/')
+
+
 app = Flask(__name__)
 app.secret_key = "squishystick"
 
@@ -26,7 +31,7 @@ def generate():
     notes, qc = create_song(song_length, song_id)
     midi = create_midi_song(notes, channel)
 
-    filepath = "/tmp/quantum-music/" + str(song_id) + ".mid"
+    filepath = get_save_dir() + str(song_id) + ".mid"
     with open(filepath, 'wb') as outf:
         midi.writeFile(outf)
     convert_midi_to_mp3(str(song_id), sf)
@@ -36,14 +41,14 @@ def generate():
 
 @app.route('/songs/<string:song_id>')
 def serve_song(song_id):
-    return send_from_directory('/tmp/quantum-music/', song_id + ".mid")
+    return send_from_directory(get_save_dir(), song_id + ".mid")
 
 
 @app.route('/circuits/<string:song_id>/<string:circuit_id>')
 def serve_circuits(song_id, circuit_id):
-    return send_from_directory('/tmp/quantum-music/' + song_id + '/', circuit_id + ".png")
+    return send_from_directory(get_save_dir() + song_id + '/', circuit_id + ".png")
 
 
 if __name__ == '__main__':
-    os.makedirs("/tmp/quantum-music/", exist_ok=True)
+    os.makedirs(get_save_dir(), exist_ok=True)
     app.run(debug=True)

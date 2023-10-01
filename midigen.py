@@ -1,5 +1,11 @@
 import subprocess
 from midiutil.MidiFile import MIDIFile
+import os
+
+
+def get_save_dir():
+    return os.environ.get('SAVE_DIR', '/tmp/quantum-music/')
+
 
 note_to_pitch = {
     'C': 60,
@@ -37,7 +43,8 @@ INSTRUMENTS = {
     'kalimba': ('soundfonts/MultiKalimba.sf2', 9)
 }
 
-def create_midi_song(song: list[list[str]], channel = 0):
+
+def create_midi_song(song: list[list[str]], channel=0):
     mf = MIDIFile(2)  # only 1 track
     track = 0         # the only track
 
@@ -97,10 +104,11 @@ def create_midi_song(song: list[list[str]], channel = 0):
 
 
 def convert_midi_to_mp3(id, soundfont):
-    input_midi = f'/tmp/quantum-music/{id}.mid'
-    raw_file = f'/tmp/quantum-music/{id}.raw'
-    wav_file = f'/tmp/quantum-music/{id}.wav'
-    mp3_file = f'/tmp/quantum-music/{id}.mp3'
+    save_dir = get_save_dir()
+    input_midi = f'{save_dir}{id}.mid'
+    raw_file = f'{save_dir}{id}.raw'
+    wav_file = f'{save_dir}{id}.wav'
+    mp3_file = f'{save_dir}{id}.mp3'
     # Convert MIDI to raw audio using FluidSynth
     fluidsynth_cmd = f'fluidsynth -a alsa -g 1.0 -l -i -T raw -F {raw_file} {soundfont} {input_midi}'
     subprocess.run(fluidsynth_cmd, shell=True)

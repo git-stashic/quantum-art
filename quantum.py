@@ -6,6 +6,10 @@ import os
 import matplotlib
 
 
+def get_save_dir():
+    return os.environ.get('SAVE_DIR', '/tmp/quantum-music/')
+
+
 backend = AerSimulator()
 
 sounds = {'0000': 'C', '0001': 'Cis', '0010': 'D',  '0011': 'Dis', '0100': 'E',
@@ -103,12 +107,12 @@ def run_tact():
 def create_song(length, song_id):
     tacts = []
     circuits = []
-    os.mkdir('/tmp/quantum-music/' + str(song_id))
+    os.mkdir(get_save_dir() + str(song_id))
     for i in range(length):
         tact, qc = run_tact()
         tacts.append(tact)
         circuits.append(qc)
-        save_circuit(qc, '/tmp/quantum-music/' +
+        save_circuit(qc, get_save_dir() +
                      str(song_id) + '/c' + str(i) + '.png')
     return tacts, circuits
 
