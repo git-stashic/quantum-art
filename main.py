@@ -17,3 +17,6 @@ def generate():
     notes = create_song(30)
     midi = create_midi_song(notes)
     return render_template('generate.html', midi=midi)
+
+if __name__ == '__main__':
+    app.run(debug=True)

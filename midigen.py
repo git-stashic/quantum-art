@@ -47,15 +47,7 @@ def create_midi_song(song: list[list[str]]):
     return mf
 
 
-example = [
-    ['Fis', 'Ais', 'E', 'E'], ['F', 'A', 'Ais*'], ['B', 'F', 'D', 'F'],
-    ['D', 'A', '_/', 'Ais', 'E/'], ['Gis/', 'Cis', 'Ais', 'D', '_/'],
-    ['Gis', 'Cis', 'F', 'C'], ['G', 'Cis', 'Gis', '_'],
-    ['E', 'Dis', 'Fis', 'F'], ['D', 'G', 'G', 'A'],
-    ['A/', 'F', 'G', 'Dis', '_/']
-]
 
-
-# write it to disk
-with open("output.mid", 'wb') as outf:
-    create_midi_song(example).writeFile(outf)
+# # write it to disk
+# with open("output.mid", 'wb') as outf:
+#     create_midi_song(example).writeFile(outf)
