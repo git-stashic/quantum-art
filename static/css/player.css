@@ -15,3 +15,31 @@ body {
     justify-content: center;
     background-color: var(--bg);
 }
+midi-player {
+    display: block;
+    width: inherit;
+    margin: 4px;
+    margin-bottom: 0;
+  }
+midi-player::part(control-panel) {
+    background: #150f70;
+    border: 2px solid #fff;
+    border-radius: 10px 10px 0 0;
+  }
+midi-player::part(play-button) {
+    color: #353;
+    border: 2px solid currentColor;
+    background-color: #fff;
+    border-radius: 20px;
+    transition: all 0.2s;
+    content: 'hello';
+  }
+midi-player::part(play-button):hover {
+    color: #aaa;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+midi-player::part(time) {
+    font-family: monospace;
+  }
+  
