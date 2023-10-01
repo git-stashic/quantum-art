@@ -9,13 +9,7 @@ sounds = {'0000': 'C', '0001': 'Cis', '0010': 'D',  '0011': 'Dis', '0100': 'E',
           '1010': 'Ais', '1011': 'B',  '1100': '', '1101': '', '1110': '', '1111':  ''}
 
 
-def get_value(gates_list=[]):
-    circ = QuantumCircuit(4,4)
-    circ.h(0)
-    circ.cx(0, 1)
-    circ.cx(0, 2)
-    circ.cx(0, 3)
-
+def get_value(circ):
     # Measurement
     meas = QuantumCircuit(4, 4)
     meas.barrier(range(4))
@@ -23,6 +17,12 @@ def get_value(gates_list=[]):
     qc = meas.compose(circ, range(4), front=True)
     qc_compiled = transpile(qc, backend)
     job_sim = backend.run(qc_compiled, shots=1)
-    return job_sim.result().get_counts(qc_compiled)
+    return sounds[list(job_sim.result().get_counts(qc_compiled).keys())[0]]
 
-print(get_value())
+# circ = QuantumCircuit(4,4)
+# circ.h(0)
+# circ.cx(0, 1)
+# circ.cx(0, 2)
+# circ.cx(0, 3)
+
+# print(get_value(circ))
